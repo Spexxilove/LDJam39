@@ -36,8 +36,14 @@ public class PlayerMovement : MonoBehaviour {
 		if(Physics.Raycast(ray,out hit)){
 			Vector3 direction = hit.point-transform.position;
 			direction.z = transform.position.z;
-
-			rb.MoveRotation(rb.rotation-Vector3.Angle(transform.up,direction)*Mathf.Sign(Vector3.Dot(transform.right,direction)));
+			if (direction.magnitude > 1) {
+				if (direction.magnitude < 5 && Vector3.Angle (transform.up, direction) < 8.0f) {
+					return;
+				}
+				if (Vector3.Angle (transform.up, direction) > 3.0f) {
+					rb.MoveRotation (rb.rotation - Vector3.Angle (transform.up, direction) * Mathf.Sign (Vector3.Dot (transform.right, direction)));
+				}
+			}
 		}
 	}
 
