@@ -9,8 +9,8 @@ public class Spawner : MonoBehaviour {
 	[SerializeField]
 	private GameObject[] cornerObjects;
 
-	private float spawnTime = 2.2f;
-	private float spawnTimeMulti =0.97f;
+	private float spawnTime = 2.3f;
+	private float spawnTimeMulti =0.96f;
 	private float timeSinceLastSpawn = 0.0f;
 
 
@@ -36,6 +36,6 @@ public class Spawner : MonoBehaviour {
 		Vector3 spawnLocation = cornerPoints [0] + Random.value * (cornerPoints [1]-cornerPoints [0]) + Random.value * (cornerPoints [2]-cornerPoints [0]);
 		Instantiate (enemies [Random.Range (0, enemies.Length - 1)], spawnLocation, Quaternion.identity);
 		timeSinceLastSpawn = 0.0f;
-		spawnTime *= spawnTimeMulti;
+		spawnTime = Mathf.Max(0.25f,spawnTime * spawnTimeMulti);
 	}
 }
